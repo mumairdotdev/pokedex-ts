@@ -14,7 +14,7 @@ export function startREPL( state: State ) {
 
     readline.prompt();
 
-    readline.on("line", (input) => {
+    readline.on("line", async (input) => {
         const cleanedInput = cleanInput(input);
         if (cleanedInput.length === 0) {
             readline.prompt();
@@ -31,7 +31,7 @@ export function startREPL( state: State ) {
         } 
         
         try {
-            cmd.callback(state);
+            await cmd.callback(state);
         } catch (e) {
             console.error(`Error occurred while executing command: ${commandName}`);
         }

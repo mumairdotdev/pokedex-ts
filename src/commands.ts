@@ -1,6 +1,7 @@
 import type { CLICommand } from "./state.js";
 import { commandExit } from "./command_exit.js";
 import { helpCommand } from "./command_help.js";
+import { mapCommand, mapbCommand } from "./command_map.js";
 
 
 export function getCommands(): Record<string, CLICommand> {
@@ -15,5 +16,15 @@ export function getCommands(): Record<string, CLICommand> {
             description: "Display a help message",
             callback: helpCommand,
         },
+        map: {
+            name: "map",
+            description: "Display a map of the Pokemon world",
+            callback: mapCommand,
+        },
+        mapb: {
+            name: "mapb",
+            description: "Display a map of the Pokemon world (backwards)",
+            callback: mapbCommand,
+        }
     };
 }
