@@ -1,7 +1,7 @@
 import { createInterface } from "readline";
+import { getCommands } from "./commands.js";
 
 export function cleanInput(input: string): string[] {
-
     return input
     .toLowerCase()
     .trim()
@@ -25,13 +25,21 @@ export function startREPL() {
             return;
         }
 
-        const command = cleanedInput[0];
-        console.log("Your command was:", command);
-        rl.prompt();
-    });
+        const commandName = cleanedInput[0];
+        const commands = getCommands()[commandName];
 
-    rl.on("close", () => {
-        console.log("Exiting REPL. Goodbye!");
-        process.exit(0);
+        if (!commands) {
+            console.log(`Unknown command: ${commandName}`);
+            rl.prompt();
+            return;
+        } 
+        
+        try {
+            commands.callback(getCommands());
+        } catch (e) {
+            console.error(`Error occurred while executing command: ${commandName}`);
+        }
+
+        rl.prompt();
     });
 }
