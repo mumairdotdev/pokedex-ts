@@ -4,9 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "npx tsc",
-    "start": "node dist/main.js",
-    "dev": "npx tsc && node dist/main.js",
+    "build": "node api.js && npx tsc",
+    "start": "node api.js && node dist/main.js",
+    "dev": "node api.js && npx tsc && node dist/main.js",
     "test": "vitest --run"
   },
   "keywords": [],
