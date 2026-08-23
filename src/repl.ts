@@ -22,6 +22,7 @@ export function startREPL( state: State ) {
         }
 
         const commandName = cleanedInput[0];
+        const args = cleanedInput.slice(1);
         const cmd = commands[commandName];
 
         if (!cmd) {
@@ -31,7 +32,7 @@ export function startREPL( state: State ) {
         } 
         
         try {
-            await cmd.callback(state);
+            await cmd.callback(state, ...args);
         } catch (e) {
             console.error(`Error occurred while executing command: ${commandName}`);
         }
