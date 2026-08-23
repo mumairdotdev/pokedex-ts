@@ -16,19 +16,16 @@ export type State = {
     previousPageURL?: string;
 }
 
-export function initState(): State {
+export function initState(cacheInterval: number): State {
     const rl = createInterface({
         input: process.stdin,
         output: process.stdout,
         prompt: "Pokedex > ",
     });
-
-    const pokeAPI = new PokeAPI();
-
     return {
         commands: getCommands(),
         readline: rl,
-        pokeAPI: new PokeAPI(),
+        pokeAPI: new PokeAPI(cacheInterval),
         nextPageURL: "",
         previousPageURL: "",
     };
